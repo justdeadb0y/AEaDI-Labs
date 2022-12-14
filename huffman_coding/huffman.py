@@ -21,6 +21,14 @@ class Node:   # Создаём класс Узел, чтобы в дальней
         print ("bits before compression: ", bef_comp) # Вывод на экран
         print ("bits after compression : ", af_comp) 
         
+        # Создаём функцию вывода закодированных данных
+    def encoded_output(data, encoded): 
+        encoded_out = [] # создадим пустой массив
+        for char in data: # проходим по исходным данным 
+            encoded_out.append(encoded[char]) # заносим в пустой массив коды символов в соответсвии с символами из data
+        outstring = ''.join([str(i) for i in encoded_out]) # методом join мы работаем с путой строкой '', и заносим , некое переопределние типа, до этого были int, мы делаем str()
+        return outstring
+        
     # Теперь напишем функцию, которая будет находить частоту встречающегося символа
 
     def calc_probs(inptdata): # На вход функции мы будем потдавать данные, которые мы считали из файла 
