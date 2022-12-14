@@ -82,6 +82,9 @@ class Node:   # Создаём класс Узел, чтобы в дальней
 
         encoding = calc_codes(array_nodes[0])
         print("chars with their codes", encoding)
+        difference_between(data, encoding) # вызываем функцию для вывода разницы в битах между исходной и зашифрованной информацией 
+        encoded_out = encoded_output(data, encoding) # вызываем функцию encoded_output(data, encoding)
+        return encoded_out, array_nodes[0] # Возвращаем закодированную строку и вершину дерева хаффмана, чтобы использовать это для раскодирования данных, без этого сделать это не выйдет
         
 #efile = open("example.txt", "r") # Открываем файл с примерным текстом
 #inptdata = efile.read() #Читаем файл
