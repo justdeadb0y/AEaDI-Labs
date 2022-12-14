@@ -38,7 +38,7 @@ class Node:   # Создаём класс Узел, чтобы в дальней
             print("chars: ", chars)
             print("probs: ", probabilities)
             # Объявим массив под узлы дерева
-            array_nodes[]
+            array_nodes = []
 
             #Заполним массив так, чтобы переделать символы и их вероятности в узлы дерева хаффмана
             for char in chars:
