@@ -29,7 +29,39 @@ class Node:   # Создаём класс Узел, чтобы в дальней
         if(not node.left and not node.right): # Если ((не (0/1 на левом узле)) и (не (0/1 на правом узле))) == true, то есть 1 это когда node.left and node.right оба равны 0 ((не 0) = 1) * ((не 0) = 1) == 1
             codes[node.char] = newvalue # Тогда мы заносим в словарик кодов для опр символов новое значение "код" символа состоящий из 0 и 1
         return codes # В результате функция вернёт словарик который мы объявляли до этого, но уже заполненный
+        # напишем функцию кодирования
+        def huffman_encoding(data): # функция кодирования параметром выступает полученные данные из файла / задали в коде 
+            dictionary_probability = calc_probs(data) # присвоим переменной наш словарик chars, который мы получили в результате работы функции calc_probs, он будет иметь поля keys(символы) и values(частота)
+            chars = dictionary_probability.keys() # Теперь наш словарик будет состоять из символов
+            probabilities = dictionary_probability.values() # Значения частоты символов, встречаемых в данных 
+            # теперь для наглядности выведем их на экран, чтобы если пример небольшой можно было убедиться в корректности выполнения функций
+            print("chars: ", chars)
+            print("probs: ", probabilities)
+            # Объявим массив под узлы дерева
+            array_nodes[]
 
+            #Заполним массив так, чтобы переделать символы и их вероятности в узлы дерева хаффмана
+            for char in chars:
+                array_nodes.append(Node(dictionary_probability.get(char), char))
+            #Создадим цикл в ходе которого отсортируем узлы в порядке возрастания в зависимости от их вероятности, так же как это было в статье на хабре
+            while len(array_nodes) > 1:
+                # Для следующего метода sorted, нам потребуется вторым аргументом задать функцию, по которой будет происходить сортировка, изучить key = lambda var: var.smth
+                array_nodes = sorted(array_nodes, key=lambda tmp: tmp.probability)
+                # Выберем 2 узла с наименьшей частотой
+                left = nodes[0]
+                right = nodes[1]
+
+                left.code = 0
+                right.code = 1
+                # теперь нужно создать новый узел, путём комбинации выбранных узлов
+                # Для этого обратимся к классу которому передадим новые аргументы
+                newnode = Node(left.probability+right.probabilitiy, left.char+right.char, left, right)
+                array_nodes.remove(left) # поскольку array_nodes - массив, можем воспользоваться методом remove, чтобы удалить использованные узлы
+                array_nodes.remove(right)
+                array_nodes.append(newnode) # методом append, добавляются новые элементы в массив
+
+            encoding = calc_codes(array_nodes[0])
+            print("chars with their codes", encoding)
         
 #efile = open("example.txt", "r") # Открываем файл с примерным текстом
 #inptdata = efile.read() #Читаем файл
