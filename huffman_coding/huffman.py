@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Node:   # Создаём класс Узел, чтобы в дальнейшем сформировать дерево, метод __init__ нужен для заполнения полей во время инициализации, а не через новую функцию set_value например
     def __init__(self, probability, char, leftnode=None, rightnode=None): 
         #self представляет экземпляр класса. Используя "self", мы можем получить доступ к атрибутам и методам класса в python. Он связывает атрибуты с заданными аргументами. 
@@ -86,13 +87,11 @@ def huffman_encoding(data): # функция кодирования параме
     encoded_out = encoded_output(data, encoding) # вызываем функцию encoded_output(data, encoding)
     return encoded_out, array_nodes[0] # Возвращаем закодированную строку и вершину дерева хаффмана, чтобы использовать это для раскодирования данных, без этого сделать это невы
 
-data = "AAAAAAABCCCCCCDDEEEEEgdsfdsfdsfdsfsdfsdfsd"
-print(data)
+#data = "AAAAAAABCCCCCCDDEEEEEgdsfdsfdsfdsfsdfsdfsd"
+#print(data)
+efile = open("example.txt", "r") # Открываем файл с примерным текстом
+data = efile.read() #Читаем файл
 encoding, tree = huffman_encoding(data)
 print("Encoded output", encoding)
-   
-        
-#efile = open("example.txt", "r") # Открываем файл с примерным текстом
-#inptdata = efile.read() #Читаем файл
-#for i in range(0,len(string)):
-#    print(ord(string[i]))
+redactfile = open("redactfile.txt", "w")
+redactfile.write(encoding)
