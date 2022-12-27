@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 class Node:   # Создаём класс Узел, чтобы в дальнейшем сформировать дерево, метод __init__ нужен для заполнения полей во время инициализации, а не через новую функцию set_value например
     def __init__(self, probability, char, leftnode=None, rightnode=None): 
@@ -87,11 +88,29 @@ def huffman_encoding(data): # функция кодирования параме
     encoded_out = encoded_output(data, encoding) # вызываем функцию encoded_output(data, encoding)
     return encoded_out, array_nodes[0] # Возвращаем закодированную строку и вершину дерева хаффмана, чтобы использовать это для раскодирования данных, без этого сделать это невы
 
-#data = "AAAAAAABCCCCCCDDEEEEEgdsfdsfdsfdsfsdfsdfsd"
-#print(data)
+def huffmanDecoding(encoded_data, huffman_tree):
+    tree_head = huffman_tree
+    decoded_output = []
+    for x in encoded_data:
+        if x == '1':
+            huffman_tree = huffman_tree.right   
+        elif x == '0':
+            huffman_tree = huffman_tree.left
+        try:
+            if huffman_tree.left.char == None and huffman_tree.right.char == None:
+                pass
+        except AttributeError:
+            decoded_output.append(huffman_tree.char)
+            huffman_tree = tree_head
+        
+    string = ''.join([str(item) for item in decoded_output])
+    return string  
+
 efile = open("example.txt", "r") # Открываем файл с примерным текстом
 data = efile.read() #Читаем файл
 encoding, tree = huffman_encoding(data)
-print("Encoded output", encoding)
-redactfile = open("redactfile.txt", "w")
+redactfile = open("encodeddata.txt", "w")
 redactfile.write(encoding)
+decodefile = open("decode.txt", "w")
+decodefile.write(huffmanDecoding(encoding,tree))
+
